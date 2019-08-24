@@ -61,8 +61,8 @@ public abstract class ChatFragment<InitModel>
     protected String mReceiverId;
     protected Adapter mAdapter;
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+//    @BindView(R.id.toolbar)
+//    Toolbar mToolbar;
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -73,8 +73,8 @@ public abstract class ChatFragment<InitModel>
 //    @BindView(R.id.collapsingToolbarLayout)
 //    CollapsingToolbarLayout mCollapsingLayout;
 
-    @BindView(R.id.ChattingBarLayout)
-    FrameLayout mFrameLayout;
+//    @BindView(R.id.ChattingBarLayout)
+//    FrameLayout mFrameLayout;
 
 
 
@@ -110,12 +110,12 @@ public abstract class ChatFragment<InitModel>
 
     @Override
     protected void initWidget(View root) {
-        // 拿到占位布局
-        // 替换顶部布局一定需要发生在super之前
-        // 防止控件绑定异常
-//        ViewStub stub = (ViewStub) root.findViewById(R.id.view_stub_header);
-//        stub.setLayoutResource(getHeaderLayoutId());
-//        stub.inflate();
+//         拿到占位布局
+//         替换顶部布局一定需要发生在super之前
+//         防止控件绑定异常
+        ViewStub stub = (ViewStub) root.findViewById(R.id.view_stub_header);
+        stub.setLayoutResource(getHeaderLayoutId());
+        stub.inflate();
 
         // 在这里进行了控件绑定
         super.initWidget(root);
@@ -242,19 +242,19 @@ public abstract class ChatFragment<InitModel>
         mPresenter.start();
     }
 
-    // 初始化Toolbar
-    protected void initToolbar() {
-        Toolbar toolbar = mToolbar;
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-    }
+//    // 初始化Toolbar
+//    protected void initToolbar() {
+//        Toolbar toolbar = mToolbar;
+//        toolbar.setNavigationIcon(R.drawable.ic_back);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().finish();
+//            }
+//        });
+//    }
 
-    //  给界面的Appbar设置一个监听，得到关闭与打开的时候的进度
+//      给界面的Appbar设置一个监听，得到关闭与打开的时候的进度
 //    private void initAppbar() {
 //        mAppBarLayout.addOnOffsetChangedListener(this);
 //    }

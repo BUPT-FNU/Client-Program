@@ -28,15 +28,15 @@ import butterknife.OnClick;
  */
 public class ChatUserFragment extends ChatFragment<User>
         implements ChatContract.UserView {
-    @BindView(R.id.im_portrait)
+    @BindView(R.id.im_portraitt)
     PortraitView mPortrait;
 
-    @BindView(R.id.im_name)
+
+@BindView(R.id.im_name)
     TextView mNameText;
 
     @BindView(R.id.im_school)
     TextView mSchoolText;
-
 
 
 
@@ -153,8 +153,8 @@ public class ChatUserFragment extends ChatFragment<User>
 //        }
 //    }
 
-    @OnClick(R.id.im_portrait)
-    void onPortraitClick() {
+    @OnClick(R.id.im_portraitt)
+    public void onPortraitClick() {
         PersonalActivity.show(getContext(), mReceiverId);
     }
 
@@ -166,7 +166,7 @@ public class ChatUserFragment extends ChatFragment<User>
 
     @Override
     public void onInit(User user) {
-        // 对和你聊天的朋友的信息进行初始化操作
+//         对和你聊天的朋友的信息进行初始化操作
         mPortrait.setup(Glide.with(this), user.getPortrait());
         mNameText.setText(user.getName());
         mSchoolText.setText(user.getSchool());
