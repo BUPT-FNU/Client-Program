@@ -40,8 +40,8 @@ public class MainActivity extends Activity
     @BindView(R.id.appbar)
     View mLayAppbar;
 
-    @BindView(R.id.im_portrait)
-    PortraitView mPortrait;
+//    @BindView(R.id.im_portrait)
+//    PortraitView mPortrait;
 
 //    @BindView(R.id.txt_title)
 //    TextView mTitle;
@@ -96,15 +96,15 @@ public class MainActivity extends Activity
         // 添加对底部按钮点击的监听
         mNavigation.setOnNavigationItemSelectedListener(this);
 
-        Glide.with(this)
-                .load(R.drawable.bg_src_morning)
-                .centerCrop()
-                .into(new ViewTarget<View, GlideDrawable>(mLayAppbar) {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        this.view.setBackground(resource.getCurrent());
-                    }
-                });
+//        Glide.with(this)
+//                .load(R.drawable.bg_src_morning)
+//                .centerCrop()
+//                .into(new ViewTarget<View, GlideDrawable>(mLayAppbar) {
+//                    @Override
+//                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+//                        this.view.setBackground(resource.getCurrent());
+//                    }
+//                });
     }
 
     @Override
@@ -116,14 +116,14 @@ public class MainActivity extends Activity
         // 触发首次选中Home
         menu.performIdentifierAction(R.id.action_home, 0);
 
-        // 初始化头像加载
-        mPortrait.setup(Glide.with(this), Account.getUser());
+//        // 初始化头像加载
+//        mPortrait.setup(Glide.with(this), Account.getUser());
     }
 
-    @OnClick(R.id.im_portrait)
-    void onPortraitClick() {
-        PersonalActivity.show(this, Account.getUserId());
-    }
+//    @OnClick(R.id.im_portrait)
+//    void onPortraitClick() {
+//        PersonalActivity.show(this, Account.getUserId());
+//    }
 
 //    @OnClick(R.id.im_search)
 //    void onSearchMenuClick() {
