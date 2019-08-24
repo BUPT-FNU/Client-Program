@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ContactRepository extends BaseDbRepository<User> implements ContactDataSource {
     @Override
-    public void load(SucceedCallback<List<User>> callback) {
+    public void load(DataSource.SucceedCallback<List<User>> callback) {
         super.load(callback);
 
         // 加载本地数据库数据

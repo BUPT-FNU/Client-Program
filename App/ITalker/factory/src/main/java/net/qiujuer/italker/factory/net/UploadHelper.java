@@ -25,13 +25,14 @@ import java.util.Date;
 public class UploadHelper {
     private static final String TAG = UploadHelper.class.getSimpleName();
     // 与你们的存储区域有关系
-    private static final String ENDPOINT = "http://oss-cn-hongkong.aliyuncs.com";
+    public static final String ENDPOINT = "http://oss-cn-hongkong.aliyuncs.com";
     // 上传的仓库名
-    private static final String BUCKET_NAME = "italker-new";
+    private static final String BUCKET_NAME = "italker";
 
 
     private static OSS getClient() {
         // 明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考后面的`访问控制`章节
+        // https://help.aliyun.com/document_detail/32046.html?spm=a2c4g.11186623.6.900.2ff87ca2WzupMX
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider(
                 "LTAIYQD07p05pHQW", "2txxzT8JXiHKEdEjylumFy6sXcDQ0G");
         return new OSSClient(Factory.app(), ENDPOINT, credentialProvider);

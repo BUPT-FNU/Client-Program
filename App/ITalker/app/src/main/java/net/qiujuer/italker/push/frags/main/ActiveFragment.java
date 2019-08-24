@@ -3,6 +3,8 @@ package net.qiujuer.italker.push.frags.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import net.qiujuer.italker.common.app.PresenterFragment;
 import net.qiujuer.italker.common.widget.EmptyView;
 import net.qiujuer.italker.common.widget.PortraitView;
 import net.qiujuer.italker.common.widget.recycler.RecyclerAdapter;
+import net.qiujuer.italker.face.Face;
 import net.qiujuer.italker.factory.model.db.Session;
 import net.qiujuer.italker.factory.presenter.message.SessionContract;
 import net.qiujuer.italker.factory.presenter.message.SessionPresenter;
@@ -124,7 +127,14 @@ public class ActiveFragment extends PresenterFragment<SessionContract.Presenter>
         protected void onBind(Session session) {
             mPortraitView.setup(Glide.with(ActiveFragment.this), session.getPicture());
             mName.setText(session.getTitle());
-            mContent.setText(TextUtils.isEmpty(session.getContent()) ? "" : session.getContent());
+
+            String str = TextUtils.isEmpty(session.getContent()) ? "" : session.getContent();
+            Spannable spannable = new SpannableString(str);
+            // 解析表情
+            Face.decode(mContent, spannable, (int) mContent.getTextSize());
+            // 把内容设置到布局上
+            mContent.setText(spannable);
+
             mTime.setText(DateTimeUtil.getSampleDate(session.getModifyAt()));
         }
     }

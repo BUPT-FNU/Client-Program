@@ -89,8 +89,8 @@
         android:translationZ="@dimen/len_8"
         app:itemIconTint="@color/text_nav"
         app:itemTextColor="@color/text_nav"
-        app:menu="@menu/navigation_items"
         tools:targetApi="lollipop"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        app:menu="@menu/navigation_items"/>
 
 </android.support.design.widget.CoordinatorLayout>

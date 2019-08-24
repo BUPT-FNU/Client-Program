@@ -30,6 +30,8 @@ public class User extends BaseDbModel<User> implements Author {
     @Column
     private String desc;
     @Column
+    private String school;
+    @Column
     private int sex = 0;
 
     // 我对某人的备注信息，也应该写入到数据库中
@@ -91,6 +93,15 @@ public class User extends BaseDbModel<User> implements Author {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
 
     public int getSex() {
         return sex;
