@@ -166,7 +166,7 @@ public class ChatUserFragment extends ChatFragment<User>
 
     @Override
     public void onInit(User user) {
-//         对和你聊天的朋友的信息进行初始化操作
+//      //   对和你聊天的朋友的信息进行初始化操作
         mPortrait.setup(Glide.with(this), user.getPortrait());
         mNameText.setText(user.getName());
         mSchoolText.setText(user.getSchool());
