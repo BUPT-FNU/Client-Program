@@ -26,6 +26,7 @@ import net.qiujuer.italker.push.R;
 import net.qiujuer.italker.push.frags.main.ActiveFragment;
 import net.qiujuer.italker.push.frags.main.ContactFragment;
 import net.qiujuer.italker.push.frags.main.GroupFragment;
+import net.qiujuer.italker.push.frags.main.PersonalFragment;
 import net.qiujuer.italker.push.helper.NavHelper;
 
 import java.util.Objects;
@@ -89,8 +90,9 @@ public class MainActivity extends Activity
         // 初始化底部辅助工具类
         mNavHelper = new NavHelper<>(this, R.id.lay_container,
                 getSupportFragmentManager(), this);
-        mNavHelper.add(R.id.action_home, new NavHelper.Tab<>(ActiveFragment.class, R.string.title_home))
-                .add(R.id.action_contact, new NavHelper.Tab<>(ContactFragment.class, R.string.title_contact));
+        mNavHelper.add(R.id.action_home, new NavHelper.Tab<>(ActiveFragment.class))
+                .add(R.id.action_contact, new NavHelper.Tab<>(ContactFragment.class))
+                .add(R.id.action_person, new NavHelper.Tab<>(PersonalFragment.class));
 
 
         // 添加对底部按钮点击的监听
@@ -136,15 +138,8 @@ public class MainActivity extends Activity
 
     @OnClick(R.id.btn_action)
     void onActionClick() {
-        // 浮动按钮点击时，判断当前界面是群还是联系人界面
-        // 如果是群，则打开群创建的界面
-        if (Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group)) {
-            // 打开群创建界面
-            GroupCreateActivity.show(this);
-        } else {
-            // 如果是其他，都打开添加用户的界面
+        // 浮动按钮点击时，打开搜索界面
             SearchActivity.show(this, SearchActivity.TYPE_USER);
-        }
     }
 
     /**
@@ -174,22 +169,14 @@ public class MainActivity extends Activity
         // 对浮动按钮进行隐藏与显示的动画
         float transY = 0;
         float rotation = 0;
-        if (Objects.equals(newTab.extra, R.string.title_home)) {
+        if (Objects.equals(newTab.extra, R.string.title_contact)) {
+            // 联系人
+            mAction.setImageResource(R.drawable.ic_contact_add);
+            rotation = 360;
+        } else {
             // 主界面时隐藏
             transY = Ui.dipToPx(getResources(), 76);
-        } else {
-            // transY 默认为0 则显示
-            if (Objects.equals(newTab.extra, R.string.title_group)) {
-                // 群
-                mAction.setImageResource(R.drawable.ic_group_add);
-                rotation = -360;
-            } else {
-                // 联系人
-                mAction.setImageResource(R.drawable.ic_contact_add);
-                rotation = 360;
             }
-        }
-
         // 开始动画
         // 旋转，Y轴位移，弹性差值器，时间
         mAction.animate()
@@ -198,7 +185,5 @@ public class MainActivity extends Activity
                 .setInterpolator(new AnticipateOvershootInterpolator(1))
                 .setDuration(480)
                 .start();
-
-
     }
 }
