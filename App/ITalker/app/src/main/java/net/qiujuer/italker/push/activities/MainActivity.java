@@ -43,8 +43,8 @@ public class MainActivity extends Activity
     @BindView(R.id.im_portrait)
     PortraitView mPortrait;
 
-    @BindView(R.id.txt_title)
-    TextView mTitle;
+//    @BindView(R.id.txt_title)
+//    TextView mTitle;
 
     @BindView(R.id.lay_container)
     FrameLayout mContainer;
@@ -125,14 +125,14 @@ public class MainActivity extends Activity
         PersonalActivity.show(this, Account.getUserId());
     }
 
-    @OnClick(R.id.im_search)
-    void onSearchMenuClick() {
-        // 在群的界面的时候，点击顶部的搜索就进入群搜索界面
-        // 其他都为人搜索的界面
-        int type = Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group) ?
-                SearchActivity.TYPE_GROUP : SearchActivity.TYPE_USER;
-        SearchActivity.show(this, type);
-    }
+//    @OnClick(R.id.im_search)
+//    void onSearchMenuClick() {
+//        // 在群的界面的时候，点击顶部的搜索就进入群搜索界面
+//        // 其他都为人搜索的界面
+//        int type = Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group) ?
+//                SearchActivity.TYPE_GROUP : SearchActivity.TYPE_USER;
+//        SearchActivity.show(this, type);
+//    }
 
     @OnClick(R.id.btn_action)
     void onActionClick() {
@@ -168,7 +168,7 @@ public class MainActivity extends Activity
     @Override
     public void onTabChanged(NavHelper.Tab<Integer> newTab, NavHelper.Tab<Integer> oldTab) {
         // 从额外字段中取出我们的Title资源Id
-        mTitle.setText(newTab.extra);
+//        mTitle.setText(newTab.extra);
 
 
         // 对浮动按钮进行隐藏与显示的动画
