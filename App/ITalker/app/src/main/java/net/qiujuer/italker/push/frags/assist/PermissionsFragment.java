@@ -4,13 +4,9 @@ package net.qiujuer.italker.push.frags.assist;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +14,9 @@ import android.view.ViewGroup;
 
 import net.qiujuer.italker.common.app.Application;
 import net.qiujuer.italker.push.R;
+import net.qiujuer.italker.push.frags.media.GalleryFragment;
 
 import java.util.List;
-import java.util.Objects;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -42,29 +38,24 @@ public class PermissionsFragment extends BottomSheetDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // 复用即可
-        return new BottomSheetDialog(Objects.requireNonNull(getContext()));
+        return new GalleryFragment.TransStatusBottomSheetDialog(getContext());
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        FragmentActivity activity = getActivity();
-        if (activity != null) {
-            haveAll(activity, activity.getSupportFragmentManager());
-        }
-    }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // 获取布局中的控件
         View root = inflater.inflate(R.layout.fragment_permissions, container, false);
 
         // 找到按钮
         root.findViewById(R.id.btn_submit)
-                .setOnClickListener(v -> {
-                    // 点击时进行申请权限
-                    requestPerm();
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // 点击时进行申请权限
+                        requestPerm();
+                    }
                 });
 
         return root;
@@ -166,17 +157,9 @@ public class PermissionsFragment extends BottomSheetDialogFragment
 
     // 私有的show方法
     private static void show(FragmentManager manager) {
-        // 去重避免多次界面重复可见导致弹出框累积
-        String tag = PermissionsFragment.class.getName();
-        Fragment oldFragment = manager.findFragmentByTag(tag);
-        if (oldFragment != null) {
-            manager.beginTransaction()
-                    .remove(oldFragment)
-                    .commitNowAllowingStateLoss();
-        }
         // 调用BottomSheetDialogFragment以及准备好的显示方法
         new PermissionsFragment()
-                .show(manager, tag);
+                .show(manager, PermissionsFragment.class.getName());
     }
 
 
@@ -217,7 +200,7 @@ public class PermissionsFragment extends BottomSheetDialogFragment
                 Manifest.permission.RECORD_AUDIO
         };
 
-        if (EasyPermissions.hasPermissions(Objects.requireNonNull(getContext()), perms)) {
+        if (EasyPermissions.hasPermissions(getContext(), perms)) {
             Application.showToast(R.string.label_permission_ok);
             // Fragment 中调用getView得到跟布局，前提是在onCreateView方法之后
             refreshState(getView());

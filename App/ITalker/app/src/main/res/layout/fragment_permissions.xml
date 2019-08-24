@@ -22,8 +22,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/len_56"
-        android:minHeight="@dimen/len_92">
+        android:minHeight="@dimen/len_92"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,8 +34,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/len_16"
-                android:layout_marginBottom="@dimen/len_16">
+                android:layout_marginBottom="@dimen/len_16"
+                android:layout_marginTop="@dimen/len_16">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,8 +68,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/len_16"
-                android:layout_marginBottom="@dimen/len_16">
+                android:layout_marginBottom="@dimen/len_16"
+                android:layout_marginTop="@dimen/len_16">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,8 +102,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/len_16"
-                android:layout_marginBottom="@dimen/len_16">
+                android:layout_marginBottom="@dimen/len_16"
+                android:layout_marginTop="@dimen/len_16">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,8 +136,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/len_16"
-                android:layout_marginBottom="@dimen/len_16">
+                android:layout_marginBottom="@dimen/len_16"
+                android:layout_marginTop="@dimen/len_16">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -172,8 +172,8 @@
                 android:layout_width="@dimen/len_172"
                 android:layout_height="@dimen/len_44"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/len_48"
                 android:layout_marginBottom="@dimen/len_48"
+                android:layout_marginTop="@dimen/len_48"
                 android:background="@drawable/sel_btn_bg_accent_44"
                 android:text="@string/label_permission_submit"
                 android:textColor="@color/white"

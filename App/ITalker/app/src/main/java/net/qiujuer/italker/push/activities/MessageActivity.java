@@ -39,7 +39,6 @@ public class MessageActivity extends Activity {
         context.startActivity(intent);
     }
 
-
     /**
      * 显示人的聊天界面
      *
@@ -103,4 +102,3 @@ public class MessageActivity extends Activity {
                 .commit();
     }
 }
-
