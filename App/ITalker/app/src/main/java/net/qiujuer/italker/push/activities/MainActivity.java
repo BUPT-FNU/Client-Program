@@ -44,11 +44,17 @@ public class MainActivity extends Activity
     @BindView(R.id.appbar)
     View mLayAppbar;
 
+    @BindView(R.id.ActiveLayout)
+    LinearLayout ActiveLayout;
+
     @BindView(R.id.ContactLayout)
     LinearLayout ContactLayout;
 
     @BindView(R.id.SearchLayout)
     LinearLayout SearchLayout;
+
+    @BindView(R.id.PersonalLayout)
+    FrameLayout PersonalLayout;
 
     @BindView(R.id.lay_container)
     FrameLayout mContainer;
@@ -93,7 +99,7 @@ public class MainActivity extends Activity
         // 初始化底部辅助工具类
         mNavHelper = new NavHelper<>(this, R.id.lay_container,
                 getSupportFragmentManager(), this);
-        mNavHelper.add(R.id.action_home, new NavHelper.Tab<>(ActiveFragment.class,R.string.title_home))
+        mNavHelper.add(R.id.action_chat, new NavHelper.Tab<>(ActiveFragment.class,R.string.title_chat))
                 .add(R.id.action_contact, new NavHelper.Tab<>(ContactFragment.class,R.string.title_contact))
                 .add(R.id.action_person, new NavHelper.Tab<>(PersonalFragment.class,R.string.title_personal))
                 .add(R.id.action_search, new NavHelper.Tab<>(SearchUserFragment.class,R.string.title_search));
@@ -120,7 +126,7 @@ public class MainActivity extends Activity
         // 从底部导中接管我们的Menu，然后进行手动的触发第一次点击
         Menu menu = mNavigation.getMenu();
         // 触发首次选中Home
-        menu.performIdentifierAction(R.id.action_home, 0);
+        menu.performIdentifierAction(R.id.action_chat, 0);
 
 //        // 初始化头像加载
 //        mPortrait.setup(Glide.with(this), Account.getUser());
@@ -170,6 +176,7 @@ public class MainActivity extends Activity
 //        mTitle.setText(newTab.extra);
 
         //实现头布局在不同Tab中的动态变换
+        ActiveLayout.setVisibility(View.GONE);
         ContactLayout.setVisibility(View.GONE);
         SearchLayout.setVisibility(View.GONE);
 
@@ -188,6 +195,12 @@ public class MainActivity extends Activity
             transY = Ui.dipToPx(getResources(), 76);
             if(Objects.equals(newTab.extra, R.string.title_search)){
                 SearchLayout.setVisibility(View.VISIBLE);
+            }
+            if(Objects.equals(newTab.extra, R.string.title_chat)){
+                ActiveLayout.setVisibility(View.VISIBLE);
+            }
+            if(Objects.equals(newTab.extra, R.string.title_personal)){
+                PersonalLayout.setVisibility(View.VISIBLE);
             }
             }
         // 开始动画
