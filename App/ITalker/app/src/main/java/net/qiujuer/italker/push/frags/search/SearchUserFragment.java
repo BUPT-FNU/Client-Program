@@ -43,6 +43,9 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
 
+    @BindView(R.id.Loading)
+    ImageView Loading;
+
     private RecyclerAdapter<UserCard> mAdapter;
 
     public SearchUserFragment() {
@@ -116,7 +119,10 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
         TextView mName;
 
         @BindView(R.id.im_follow)
-        ImageView mFollow;
+        TextView mFollow;
+
+        @BindView(R.id.im_followed)
+        TextView mFollowed;
 
         private FollowContract.Presenter mPresenter;
 
@@ -131,7 +137,12 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
         protected void onBind(UserCard userCard) {
             mPortraitView.setup(Glide.with(SearchUserFragment.this), userCard);
             mName.setText(userCard.getName());
-            mFollow.setEnabled(!userCard.isFollow());
+            if(userCard.isFollow()){
+                mFollow.setVisibility(View.GONE);
+                mFollowed.setVisibility(View.VISIBLE);
+            }
+
+//            mFollow.setEnabled(!userCard.isFollow());
         }
 
         @OnClick(R.id.im_portrait)
@@ -144,14 +155,15 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
         void onFollowClick() {
             // 发起关注
             mPresenter.follow(mData.getId());
+
         }
 
         @Override
         public void showError(int str) {
             // 更改当前界面状态
-            if (mFollow.getDrawable() instanceof LoadingDrawable) {
+            if (Loading.getDrawable() instanceof LoadingDrawable) {
                 // 失败则停止动画，并且显示一个圆圈
-                LoadingDrawable drawable = (LoadingDrawable) mFollow.getDrawable();
+                LoadingDrawable drawable = (LoadingDrawable) Loading.getDrawable();
                 drawable.setProgress(1);
                 drawable.stop();
             }
@@ -168,7 +180,7 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
             int[] color = new int[]{UiCompat.getColor(getResources(), R.color.white_alpha_208)};
             drawable.setForegroundColor(color);
             // 设置进去
-            mFollow.setImageDrawable(drawable);
+            Loading.setImageDrawable(drawable);
             // 启动动画
             drawable.start();
         }
@@ -181,10 +193,8 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
         @Override
         public void onFollowSucceed(UserCard userCard) {
             // 更改当前界面状态
-            if (mFollow.getDrawable() instanceof LoadingDrawable) {
-                ((LoadingDrawable) mFollow.getDrawable()).stop();
-                // 设置为默认的
-                mFollow.setImageResource(R.drawable.sel_opt_done_add);
+            if (Loading.getDrawable() instanceof LoadingDrawable) {
+                ((LoadingDrawable) Loading.getDrawable()).stop();
             }
             // 发起更新
             updateData(userCard);

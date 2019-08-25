@@ -19,4 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ImageView
+        android:id="@+id/Loading"
+        android:layout_width="@dimen/len_20"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="630dp"
+        android:background="@color/g_default_base_transparent" />
+
 </FrameLayout>
