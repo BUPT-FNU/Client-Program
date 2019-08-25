@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +29,7 @@ import net.qiujuer.italker.push.frags.main.ActiveFragment;
 import net.qiujuer.italker.push.frags.main.ContactFragment;
 import net.qiujuer.italker.push.frags.main.GroupFragment;
 import net.qiujuer.italker.push.frags.main.PersonalFragment;
+import net.qiujuer.italker.push.frags.search.SearchUserFragment;
 import net.qiujuer.italker.push.helper.NavHelper;
 
 import java.util.Objects;
@@ -41,11 +44,11 @@ public class MainActivity extends Activity
     @BindView(R.id.appbar)
     View mLayAppbar;
 
-//    @BindView(R.id.im_portrait)
-//    PortraitView mPortrait;
+    @BindView(R.id.ContactLayout)
+    LinearLayout ContactLayout;
 
-//    @BindView(R.id.txt_title)
-//    TextView mTitle;
+    @BindView(R.id.SearchLayout)
+    LinearLayout SearchLayout;
 
     @BindView(R.id.lay_container)
     FrameLayout mContainer;
@@ -90,9 +93,10 @@ public class MainActivity extends Activity
         // 初始化底部辅助工具类
         mNavHelper = new NavHelper<>(this, R.id.lay_container,
                 getSupportFragmentManager(), this);
-        mNavHelper.add(R.id.action_home, new NavHelper.Tab<>(ActiveFragment.class))
-                .add(R.id.action_contact, new NavHelper.Tab<>(ContactFragment.class))
-                .add(R.id.action_person, new NavHelper.Tab<>(PersonalFragment.class));
+        mNavHelper.add(R.id.action_home, new NavHelper.Tab<>(ActiveFragment.class,R.string.title_home))
+                .add(R.id.action_contact, new NavHelper.Tab<>(ContactFragment.class,R.string.title_contact))
+                .add(R.id.action_person, new NavHelper.Tab<>(PersonalFragment.class,R.string.title_personal))
+                .add(R.id.action_search, new NavHelper.Tab<>(SearchUserFragment.class,R.string.title_search));
 
 
         // 添加对底部按钮点击的监听
@@ -165,17 +169,26 @@ public class MainActivity extends Activity
         // 从额外字段中取出我们的Title资源Id
 //        mTitle.setText(newTab.extra);
 
+        //实现头布局在不同Tab中的动态变换
+        ContactLayout.setVisibility(View.GONE);
+        SearchLayout.setVisibility(View.GONE);
+
+
 
         // 对浮动按钮进行隐藏与显示的动画
         float transY = 0;
         float rotation = 0;
         if (Objects.equals(newTab.extra, R.string.title_contact)) {
+            ContactLayout.setVisibility(View.VISIBLE);
             // 联系人
             mAction.setImageResource(R.drawable.ic_contact_add);
             rotation = 360;
         } else {
             // 主界面时隐藏
             transY = Ui.dipToPx(getResources(), 76);
+            if(Objects.equals(newTab.extra, R.string.title_search)){
+                SearchLayout.setVisibility(View.VISIBLE);
+            }
             }
         // 开始动画
         // 旋转，Y轴位移，弹性差值器，时间

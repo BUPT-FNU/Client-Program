@@ -150,8 +150,9 @@ public class NavHelper<T> {
      * @param <T> 范型的额外参数
      */
     public static class Tab<T> {
-        public Tab(Class<?> clx) {
+        public Tab(Class<?> clx, T extra) {
             this.clx = clx;
+            this.extra = extra;
         }
 
         // Fragment对应的Class信息

@@ -14,9 +14,9 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_follow"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/action_follow"
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_search"
         app:showAsAction="ifRoom" />
 
     <item
